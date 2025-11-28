@@ -124,8 +124,9 @@ CSRF_TRUSTED_ORIGINS = [
     "https://www.khume.co.za",
 ]
 
-
 # Optional: Timeout settings to prevent hanging
-EMAIL_TIMEOUT = 10  # 10 seconds timeout
+# EMAIL_TIMEOUT = 10  # 10 seconds timeout
 
 BREVO_API_KEY = os.getenv("BREVO_API_KEY")
+
+print("BREVO KEY:", BREVO_API_KEY)
