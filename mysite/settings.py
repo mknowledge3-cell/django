@@ -123,11 +123,12 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST = "smtp-relay.brevo.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-EMAIL_HOST_USER = "mknowledge3@gmail.com"
-EMAIL_HOST_PASSWORD = "Fu3tr0n@ge"
+EMAIL_HOST_USER = "9cc16e001@smtp-brevo.com"
+EMAIL_HOST_PASSWORD = "xsmtpsib-eb10a1c7b54f2bad0f5aede5661fda2062a49742bddc684648d5133f1be676ea-AfcjFJqOGF3Ra6YT"
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
