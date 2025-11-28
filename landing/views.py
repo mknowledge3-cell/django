@@ -119,60 +119,50 @@ class ContactView(View):
                 'message': message
             })
 
-from django.shortcuts import render, redirect
-from django.contrib import messages
-from django.core.mail import send_mail
+# landing/views.py
+import sib_api_v3_sdk
+from sib_api_v3_sdk.rest import ApiException
 from django.conf import settings
-from .models import ContactMessage
-
+from django.shortcuts import render
+from django.http import HttpResponseRedirect
 
 def contact_view(request):
+    preselected_service = request.GET.get("service", "")
+
     if request.method == "POST":
-
-        # Honeypot bot protection
-        if request.POST.get("website"):
-            return redirect("contact")  # Silently ignore bots
-
         name = request.POST.get("name")
         email = request.POST.get("email")
         service = request.POST.get("service")
         budget = request.POST.get("budget")
         message = request.POST.get("message")
 
-        # Save to database
-        ContactMessage.objects.create(
-            name=name,
-            email=email,
-            service=service,
-            budget=budget,
-            message=message
+        # --- Prepare Brevo Client ---
+        configuration = sib_api_v3_sdk.Configuration()
+        configuration.api_key["api-key"] = settings.BREVO_API_KEY
+
+        api_instance = sib_api_v3_sdk.TransactionalEmailsApi(
+            sib_api_v3_sdk.ApiClient(configuration)
         )
 
-        # Email to YOU
-        send_mail(
-            subject=f"New Contact Message from {name}",
-            message=f"""
-Name: {name}
-Email: {email}
-Service: {service}
-Budget: {budget}
-
-Message:
-{message}
-""",
-            from_email=settings.DEFAULT_FROM_EMAIL,
-            recipient_list=[settings.DEFAULT_FROM_EMAIL],
+        email_data = sib_api_v3_sdk.SendSmtpEmail(
+            sender={"name": name, "email": email},
+            to=[{"email": "mknowledge3@gmail.com"}],  # where YOU receive messages
+            subject=f"New Contact Form Message ({service})",
+            html_content=f"""
+                <h2>New Contact Form Submission</h2>
+                <p><strong>Name:</strong> {name}</p>
+                <p><strong>Email:</strong> {email}</p>
+                <p><strong>Service:</strong> {service}</p>
+                <p><strong>Budget:</strong> {budget}</p>
+                <p><strong>Message:</strong><br>{message}</p>
+            """,
         )
 
-        # Auto-reply
-        send_mail(
-            subject="We received your message!",
-            message=f"Hello {name},\n\nThanks for reaching out! I'll get back to you shortly.\n\n– khume Web Agency",
-            from_email=settings.DEFAULT_FROM_EMAIL,
-            recipient_list=[email],
-        )
+        try:
+            api_instance.send_transac_email(email_data)
+        except ApiException as e:
+            print("Brevo API error:", e)
 
-        messages.success(request, "Your message has been sent successfully!")
-        return redirect("contact")
+        return HttpResponseRedirect("/contact?success=1")
 
-    return render(request, "landing/contact.html")
+    return render(request, "landing/contact.html", {"preselected_service": preselected_service})

@@ -12,13 +12,9 @@
         </div>
 
         <!-- Messages -->
-        {% if messages %}
-        <div class="mb-8">
-            {% for message in messages %}
-            <div class="p-4 rounded-lg {% if message.tags == 'success' %}bg-green-100 text-green-700{% else %}bg-red-100 text-red-700{% endif %}">
-                {{ message }}
-            </div>
-            {% endfor %}
+        {% if request.GET.success %}
+        <div class="bg-green-100 text-green-700 p-4 rounded-lg mb-6">
+            Message sent! We'll get back to you soon.
         </div>
         {% endif %}
 
