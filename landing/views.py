@@ -73,12 +73,12 @@ class ContactView(View):
             """
 
             # Send email (use your actual email in production)
-            recipient_email = os.environ.get('CONTACT_EMAIL', 'your-email@yourdomain.com')
+            recipient_email = os.environ.get('CONTACT_EMAIL', 'mknowledge3@gmail.com')
 
             send_mail(
                 subject=subject,
                 message=email_message,
-                from_email=os.environ.get('DEFAULT_FROM_EMAIL', 'noreply@yourdomain.com'),
+                from_email=os.environ.get('DEFAULT_FROM_EMAIL', 'info@khume.co.za'),
                 recipient_list=[recipient_email],
                 fail_silently=False,
             )
@@ -98,9 +98,9 @@ class ContactView(View):
             send_mail(
                 subject=user_subject,
                 message=user_message,
-                from_email=os.environ.get('DEFAULT_FROM_EMAIL', 'noreply@yourdomain.com'),
+                from_email=os.environ.get('DEFAULT_FROM_EMAIL', 'info@khume.co.za'),
                 recipient_list=[email],
-                fail_silently=True,  # Don't fail if user email fails
+                fail_silently=True,
             )
 
             messages.success(request, 'Thank you for your message! We will get back to you soon.')
@@ -167,7 +167,7 @@ Message:
         # Auto-reply
         send_mail(
             subject="We received your message!",
-            message=f"Hello {name},\n\nThanks for reaching out! I'll get back to you shortly.\n\n– Khume Web Agency",
+            message=f"Hello {name},\n\nThanks for reaching out! I'll get back to you shortly.\n\n– khume Web Agency",
             from_email=settings.DEFAULT_FROM_EMAIL,
             recipient_list=[email],
         )
