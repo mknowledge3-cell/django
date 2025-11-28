@@ -127,16 +127,16 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 
 def contact_view(request):
-    preselected_service = request.GET.get("service", "")
+
+    # Capture prefilled query parameters or defaults
+    name = request.POST.get("name", "")
+    email = request.POST.get("email", "")
+    service = request.POST.get("service", request.GET.get("service", ""))
+    message_text = request.POST.get("message", "")
 
     if request.method == "POST":
-        name = request.POST.get("name")
-        email = request.POST.get("email")
-        service = request.POST.get("service")
-        budget = request.POST.get("budget")
-        message = request.POST.get("message")
 
-        # --- Prepare Brevo Client ---
+        # Prepare Brevo client
         configuration = sib_api_v3_sdk.Configuration()
         configuration.api_key["api-key"] = settings.BREVO_API_KEY
 
@@ -145,24 +145,28 @@ def contact_view(request):
         )
 
         email_data = sib_api_v3_sdk.SendSmtpEmail(
-            sender={"name": name, "email": email},
-            to=[{"email": "mknowledge3@gmail.com"}],  # where YOU receive messages
+            sender={"name": name, "email": email},  # visitor's email
+            to=[{"email": "hello@khume.co.za"}],     # YOU receive it
             subject=f"New Contact Form Message ({service})",
             html_content=f"""
                 <h2>New Contact Form Submission</h2>
                 <p><strong>Name:</strong> {name}</p>
                 <p><strong>Email:</strong> {email}</p>
                 <p><strong>Service:</strong> {service}</p>
-                <p><strong>Budget:</strong> {budget}</p>
-                <p><strong>Message:</strong><br>{message}</p>
+                <p><strong>Message:</strong><br>{message_text}</p>
             """,
         )
 
         try:
             api_instance.send_transac_email(email_data)
         except ApiException as e:
-            print("Brevo API error:", e)
+            print("Brevo Error:", e)
 
-        return HttpResponseRedirect("/contact?success=1")
+        return redirect("/contact?success=1")
 
-    return render(request, "landing/contact.html", {"preselected_service": preselected_service})
+    return render(request, "landing/contact.html", {
+        "name": name,
+        "email": email,
+        "service": service,
+        "message": message_text,
+    })
