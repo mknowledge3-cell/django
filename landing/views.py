@@ -1,3 +1,5 @@
+import os
+
 from django.shortcuts import render
 from django.views.generic import TemplateView
 
@@ -22,15 +24,100 @@ def business_site(request):
 def ecommerce(request):
     return render(request, "portfolios/portfolio_ecommerce.html")
 
-class ContactView(TemplateView):
+from django.shortcuts import render, redirect
+from django.views.generic import TemplateView, View
+from django.core.mail import send_mail, BadHeaderError
+from django.http import HttpResponse
+from django.contrib import messages
+import logging
+logger = logging.getLogger(__name__)
+class ContactView(View):
     template_name = 'landing/contact.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        # Get the service parameter from URL
-        service = self.request.GET.get('service', '')
-        context['preselected_service'] = service
-        return context
+    def get(self, request):
+        service = request.GET.get('service', '')
+        return render(request, self.template_name, {'service': service})
+
+    def post(self, request):
+        try:
+            name = request.POST.get('name', '').strip()
+            email = request.POST.get('email', '').strip()
+            service = request.POST.get('service', '').strip()
+            message = request.POST.get('message', '').strip()
+
+            # Basic validation
+            if not all([name, email, message]):
+                messages.error(request, 'Please fill in all required fields.')
+                return render(request, self.template_name, {
+                    'name': name,
+                    'email': email,
+                    'service': service,
+                    'message': message
+                })
+
+            # Prepare email content
+            subject = f"New Contact Form Submission - {service}" if service else "New Contact Form Submission"
+
+            email_message = f"""
+            New contact form submission from your website:
+
+            Name: {name}
+            Email: {email}
+            Service: {service if service else 'Not specified'}
+
+            Message:
+            {message}
+
+            ---
+            This message was sent from your website contact form.
+            """
+
+            # Send email (use your actual email in production)
+            recipient_email = os.environ.get('CONTACT_EMAIL', 'your-email@yourdomain.com')
+
+            send_mail(
+                subject=subject,
+                message=email_message,
+                from_email=os.environ.get('DEFAULT_FROM_EMAIL', 'noreply@yourdomain.com'),
+                recipient_list=[recipient_email],
+                fail_silently=False,
+            )
+
+            # Send confirmation to user
+            user_subject = "Thank you for contacting us!"
+            user_message = f"""
+            Hi {name},
+
+            Thank you for reaching out to us regarding our {service if service else 'services'}. 
+            We have received your message and will get back to you within 24-48 hours.
+
+            Best regards,
+            Your Web Design Team
+            """
+
+            send_mail(
+                subject=user_subject,
+                message=user_message,
+                from_email=os.environ.get('DEFAULT_FROM_EMAIL', 'noreply@yourdomain.com'),
+                recipient_list=[email],
+                fail_silently=True,  # Don't fail if user email fails
+            )
+
+            messages.success(request, 'Thank you for your message! We will get back to you soon.')
+            return redirect('contact')
+
+        except BadHeaderError:
+            messages.error(request, 'Invalid header found.')
+            return render(request, self.template_name)
+        except Exception as e:
+            logger.error(f"Email sending failed: {str(e)}")
+            messages.error(request, 'Sorry, there was an error sending your message. Please try again later.')
+            return render(request, self.template_name, {
+                'name': name,
+                'email': email,
+                'service': service,
+                'message': message
+            })
 
 from django.shortcuts import render, redirect
 from django.contrib import messages

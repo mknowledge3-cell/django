@@ -122,7 +122,16 @@ CSRF_TRUSTED_ORIGINS = [
     "https://www.khume.co.za",
 ]
 
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp-relay.brevo.com"
-EMAIL_PORT = 587
+# Email Configuration for Brevo
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp-relay.brevo.com'  # Brevo SMTP server
+EMAIL_PORT = 587  # Use 587 for TLS
 EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False  # Make sure this is False when using TLS
+EMAIL_HOST_USER = os.environ.get('BREVO_SMTP_USER')  # Your Brevo SMTP username
+EMAIL_HOST_PASSWORD = os.environ.get('BREVO_SMTP_PASSWORD')  # Your Brevo SMTP password
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'info@khume.co.za')
+SERVER_EMAIL = DEFAULT_FROM_EMAIL
+
+# Optional: Timeout settings to prevent hanging
+EMAIL_TIMEOUT = 10  # 10 seconds timeout
