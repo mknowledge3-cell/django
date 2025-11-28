@@ -133,10 +133,7 @@ else:
     EMAIL_PORT = 587
     EMAIL_USE_TLS = True
     EMAIL_USE_SSL = False
-    EMAIL_HOST_USER = "9cc16e001@smtp-brevo.com"
-    EMAIL_HOST_PASSWORD = "bsk0ZEfpYZHS6za"
-    DEFAULT_FROM_EMAIL = 'info@khume.co.za'
-    SERVER_EMAIL = DEFAULT_FROM_EMAIL
+
 
 # Optional: Timeout settings to prevent hanging
 EMAIL_TIMEOUT = 10  # 10 seconds timeout
