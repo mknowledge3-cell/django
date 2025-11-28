@@ -73,12 +73,12 @@ class ContactView(View):
             """
 
             # Send email (use your actual email in production)
-            recipient_email = os.environ.get('CONTACT_EMAIL', 'mknowledge3@gmail.com')
+            recipient_email = 'mknowledge3@gmail.com'
 
             send_mail(
                 subject=subject,
                 message=email_message,
-                from_email=os.environ.get('DEFAULT_FROM_EMAIL', 'info@khume.co.za'),
+                from_email='info@khume.co.za',
                 recipient_list=[recipient_email],
                 fail_silently=False,
             )
@@ -98,7 +98,7 @@ class ContactView(View):
             send_mail(
                 subject=user_subject,
                 message=user_message,
-                from_email=os.environ.get('DEFAULT_FROM_EMAIL', 'info@khume.co.za'),
+                from_email='info@khume.co.za',
                 recipient_list=[email],
                 fail_silently=True,
             )
