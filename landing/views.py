@@ -146,7 +146,7 @@ def contact_view(request):
 
         email_data = sib_api_v3_sdk.SendSmtpEmail(
             sender={"name": "khume Website", "email": "info@khume.co.za"},
-            to=[{"email": "mknowldge3@gmail.com"}],
+            to=[{"email": "mknowledge3@gmail.com"}],
             reply_to={"email": email},
             subject=f"New Contact Form Message ({service})",
             html_content=f"""
