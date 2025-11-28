@@ -1,9 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Your Web Design Business{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}Professional web design and development services. Custom websites, e-commerce solutions, membership portals, and web applications.{% endblock %}">
+    <meta name="keywords" content="{% block meta_keywords %}web design, web development, e-commerce, membership sites, web applications, django, python{% endblock %}">
+    <meta name="author" content="Your Brand Name">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="{% block og_title %}{% block title %}Your Web Design Business{% endblock %}{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Professional web design and development services.{% endblock %}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:image" content="{% block og_image %}{% static 'images/og-image.jpg' %}{% endblock %}">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{% block twitter_title %}Your Web Design Business{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}Professional web design and development services.{% endblock %}">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{{ request.build_absolute_uri }}">
+
+    <title>Your Web Design Business</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -15,7 +35,9 @@
             transition: transform 0.3s ease;
         }
     </style>
+    {% include 'includes/structured_data.html' %}
 </head>
+
 <body class="bg-gray-50">
     <!-- Navigation -->
     <nav class="bg-white shadow-lg fixed w-full top-0 z-50">

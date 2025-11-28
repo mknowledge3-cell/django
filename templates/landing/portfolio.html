@@ -1,8 +1,265 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block title %}Our Portfolio - Web Design & Development Projects{% endblock %}
+
+{% block meta_description %}View our portfolio of web design and development projects including e-commerce stores, membership portals, business websites, and custom web applications.{% endblock %}
+
+{% block meta_keywords %}web design portfolio, development projects, e-commerce examples, membership sites, web application case studies{% endblock %}
+
+{% block og_title %}Web Design Portfolio - Our Recent Projects{% endblock %}
+
+{% block og_description %}See our recent web design and development projects. We build beautiful, functional websites that deliver results.{% endblock %}
+
 {% block content %}
 
+<!-- HERO SECTION -->
+<section class="pt-24 pb-16 bg-gradient-to-r from-purple-600 to-blue-600 text-white">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+        <h1 class="text-5xl font-bold mb-4">Our Work</h1>
+        <p class="text-xl max-w-3xl mx-auto text-blue-100">
+            Here are some of the projects we've delivered with precision, creativity, and performance-driven engineering.
+        </p>
+    </div>
+</section>
 
+<!-- PORTFOLIO GRID -->
+<section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+        <!-- Section Heading -->
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-800 mb-4">Featured Projects</h2>
+            <p class="text-xl text-gray-600">A showcase of work built for real businesses with real results.</p>
+        </div>
+
+        <!-- Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
+
+            <!-- Project Card 1 - School Papers Portal -->
+            <div class="bg-gray-50 rounded-2xl overflow-hidden shadow hover-lift border border-gray-200">
+                <div class="h-56 bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center">
+                    <div class="text-center text-white">
+                        <i class="fas fa-graduation-cap text-6xl mb-4"></i>
+                        <h3 class="text-2xl font-bold">Membership Portal</h3>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">School Papers Portal</h3>
+                    <p class="text-gray-600 mb-4">
+                        A full membership-based platform for students to access grade-specific papers, purchase premium bundles,
+                        and unlock exclusive downloadable content.
+                    </p>
+                    <ul class="text-gray-700 space-y-2 text-sm mb-6">
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Tiered access system</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> File delivery portal</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Admin & client dashboards</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Built in 1 week instead of 2 months</li>
+                    </ul>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-sm font-medium">Membership</span>
+                        <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm font-medium">Paywall</span>
+                        <span class="bg-green-100 text-green-600 px-3 py-1 rounded-full text-sm font-medium">File Portal</span>
+                    </div>
+                    <a href="{% url 'portfolio_school_portal' %}" class="text-purple-600 font-semibold hover:underline inline-flex items-center">
+                        View Case Study <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Project Card 2 - Business Website -->
+            <div class="bg-gray-50 rounded-2xl overflow-hidden shadow hover-lift border border-gray-200">
+                <div class="h-56 bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center">
+                    <div class="text-center text-white">
+                        <i class="fas fa-briefcase text-6xl mb-4"></i>
+                        <h3 class="text-2xl font-bold">Business Site</h3>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Professional Business Website</h3>
+                    <p class="text-gray-600 mb-4">
+                        Clean, fast-loading business website designed to convert visitors with strong branding and clear messaging.
+                    </p>
+                    <ul class="text-gray-700 space-y-2 text-sm mb-6">
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Responsive design</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Contact forms + lead capture</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> SEO optimised</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Fast performance</li>
+                    </ul>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm font-medium">Web Design</span>
+                        <span class="bg-green-100 text-green-600 px-3 py-1 rounded-full text-sm font-medium">SEO</span>
+                        <span class="bg-orange-100 text-orange-600 px-3 py-1 rounded-full text-sm font-medium">Responsive</span>
+                    </div>
+                    <a href="{% url 'portfolio_business_site' %}" class="text-purple-600 font-semibold hover:underline inline-flex items-center">
+                        View Case Study <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Project Card 3 - E-commerce Store -->
+            <div class="bg-gray-50 rounded-2xl overflow-hidden shadow hover-lift border border-gray-200">
+                <div class="h-56 bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center">
+                    <div class="text-center text-white">
+                        <i class="fas fa-shopping-cart text-6xl mb-4"></i>
+                        <h3 class="text-2xl font-bold">E-commerce</h3>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">E-commerce Store</h3>
+                    <p class="text-gray-600 mb-4">
+                        A fully custom online store with product management, secure checkout, and order tracking.
+                    </p>
+                    <ul class="text-gray-700 space-y-2 text-sm mb-6">
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Product & inventory system</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Payment integration</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Admin sales dashboard</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Order management</li>
+                    </ul>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="bg-green-100 text-green-600 px-3 py-1 rounded-full text-sm font-medium">E-commerce</span>
+                        <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm font-medium">Payments</span>
+                        <span class="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-sm font-medium">Inventory</span>
+                    </div>
+                    <a href="{% url 'portfolio_ecommerce' %}" class="text-purple-600 font-semibold hover:underline inline-flex items-center">
+                        View Case Study <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Project Card 4 - Web Application -->
+            <div class="bg-gray-50 rounded-2xl overflow-hidden shadow hover-lift border border-gray-200">
+                <div class="h-56 bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center">
+                    <div class="text-center text-white">
+                        <i class="fas fa-laptop-code text-6xl mb-4"></i>
+                        <h3 class="text-2xl font-bold">Web App</h3>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Custom Web Application</h3>
+                    <p class="text-gray-600 mb-4">
+                        A powerful web application with user authentication, real-time features, and custom business logic.
+                    </p>
+                    <ul class="text-gray-700 space-y-2 text-sm mb-6">
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> User authentication</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Real-time updates</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Custom business logic</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Admin dashboard</li>
+                    </ul>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="bg-orange-100 text-orange-600 px-3 py-1 rounded-full text-sm font-medium">Web App</span>
+                        <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm font-medium">Real-time</span>
+                        <span class="bg-green-100 text-green-600 px-3 py-1 rounded-full text-sm font-medium">Database</span>
+                    </div>
+{#                    <a href="#" class="text-purple-600 font-semibold hover:underline inline-flex items-center">#}
+{#                        View Case Study <i class="fas fa-arrow-right ml-2"></i>#}
+{#                    </a>#}
+                </div>
+            </div>
+
+            <!-- Project Card 5 - Membership Platform -->
+            <div class="bg-gray-50 rounded-2xl overflow-hidden shadow hover-lift border border-gray-200">
+                <div class="h-56 bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center">
+                    <div class="text-center text-white">
+                        <i class="fas fa-users text-6xl mb-4"></i>
+                        <h3 class="text-2xl font-bold">Membership</h3>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Premium Membership Platform</h3>
+                    <p class="text-gray-600 mb-4">
+                        Exclusive membership site with tiered access, subscription management, and premium content delivery.
+                    </p>
+                    <ul class="text-gray-700 space-y-2 text-sm mb-6">
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Tiered membership levels</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Subscription billing</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Content gating</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> User progress tracking</li>
+                    </ul>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="bg-pink-100 text-pink-600 px-3 py-1 rounded-full text-sm font-medium">Membership</span>
+                        <span class="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-sm font-medium">Subscriptions</span>
+                        <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm font-medium">Paywall</span>
+                    </div>
+{#                    <a href="#" class="text-purple-600 font-semibold hover:underline inline-flex items-center">#}
+{#                        View Case Study <i class="fas fa-arrow-right ml-2"></i>#}
+{#                    </a>#}
+                </div>
+            </div>
+
+            <!-- Project Card 6 - Portal System -->
+            <div class="bg-gray-50 rounded-2xl overflow-hidden shadow hover-lift border border-gray-200">
+                <div class="h-56 bg-gradient-to-br from-teal-500 to-cyan-600 flex items-center justify-center">
+                    <div class="text-center text-white">
+                        <i class="fas fa-file-download text-6xl mb-4"></i>
+                        <h3 class="text-2xl font-bold">File Portal</h3>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Secure File Portal</h3>
+                    <p class="text-gray-600 mb-4">
+                        Secure document and file sharing portal with user permissions, download tracking, and access control.
+                    </p>
+                    <ul class="text-gray-700 space-y-2 text-sm mb-6">
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Secure file storage</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> User permissions</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Download tracking</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Access control</li>
+                    </ul>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="bg-teal-100 text-teal-600 px-3 py-1 rounded-full text-sm font-medium">File Portal</span>
+                        <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm font-medium">Security</span>
+                        <span class="bg-green-100 text-green-600 px-3 py-1 rounded-full text-sm font-medium">Tracking</span>
+                    </div>
+{#                    <a href="#" class="text-purple-600 font-semibold hover:underline inline-flex items-center">#}
+{#                        View Case Study <i class="fas fa-arrow-right ml-2"></i>#}
+{#                    </a>#}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- STATS SECTION -->
+<section class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="grid md:grid-cols-4 gap-8 text-center">
+            <div>
+                <div class="text-4xl font-bold text-purple-600 mb-2">50+</div>
+                <div class="text-gray-600">Projects Completed</div>
+            </div>
+            <div>
+                <div class="text-4xl font-bold text-blue-600 mb-2">98%</div>
+                <div class="text-gray-600">Client Satisfaction</div>
+            </div>
+            <div>
+                <div class="text-4xl font-bold text-green-600 mb-2">2-4x</div>
+                <div class="text-gray-600">Faster Delivery</div>
+            </div>
+            <div>
+                <div class="text-4xl font-bold text-orange-600 mb-2">24/7</div>
+                <div class="text-gray-600">Support Available</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA SECTION -->
+<section class="py-20 bg-gradient-to-r from-purple-600 to-blue-600 text-white">
+    <div class="max-w-4xl mx-auto text-center px-4">
+        <h2 class="text-4xl font-bold mb-6">Want Results Like These?</h2>
+        <p class="text-xl mb-8 text-blue-100">
+            Let's work together to build a powerful, beautiful, and high-performing website for your business.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="{% url 'contact' %}" class="bg-white text-purple-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition duration-300">
+                Start Your Project
+            </a>
+            <a href="{% url 'services' %}" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-purple-600 transition duration-300">
+                View Services
+            </a>
+        </div>
+    </div>
+</section>
 
 {% endblock %}

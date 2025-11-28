@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Case Study – School Papers Portal{% endblock %}
+
+{% block content %}
+
+<!-- HERO SECTION -->
+<section class="pt-24 pb-16 bg-gradient-to-r from-purple-600 to-blue-600 text-white">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+        <h1 class="text-5xl font-bold mb-4">School Papers Portal</h1>
+        <p class="text-xl max-w-3xl mx-auto text-blue-100">
+            A complete membership-based file delivery system for students, built with 
+            tiered access, premium downloads, and two dashboards — delivered in just one week.
+        </p>
+    </div>
+</section>
+
+<!-- OVERVIEW -->
+<section class="py-20 bg-white">
+    <div class="max-w-5xl mx-auto px-4">
+        <div class="mb-10">
+            <h2 class="text-4xl font-bold text-gray-800 mb-4">Project Overview</h2>
+            <p class="text-xl text-gray-600">
+                The client needed a secure system for distributing past papers, with tiered access 
+                based on payment level. The estimate for this system from other developers was 
+                <strong>2 months</strong> — I delivered the full platform in <strong>7 days</strong>.
+            </p>
+        </div>
+        <!-- PROBLEM -->
+        <div class="mb-16">
+            <h3 class="text-3xl font-bold text-gray-800 mb-3">The Challenge</h3>
+            <p class="text-gray-600 text-lg">
+                The school needed a digital platform where:
+            </p>
+            <ul class="list-disc ml-6 mt-4 text-gray-700 space-y-2">
+                <li>Students could access grade-specific papers</li>
+                <li>Premium users could unlock bonus content</li>
+                <li>Admins could easily upload, organize, and manage files</li>
+                <li>Unauthorized file access was prevented</li>
+                <li>Logins needed to be secure and easy</li>
+            </ul>
+        </div>
+
+        <!-- SOLUTION -->
+        <div class="mb-16">
+            <h3 class="text-3xl font-bold text-gray-800 mb-3">The Solution</h3>
+            <p class="text-gray-600 text-lg mb-4">
+                I built a Django-powered membership portal with:
+            </p>
+            <ul class="space-y-3 text-gray-700">
+                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Tiered access system</li>
+                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Real-time admin dashboard</li>
+                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Secure file delivery (no direct URLs)</li>
+                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Payment-based content unlocking</li>
+                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Mobile-friendly UX</li>
+            </ul>
+        </div>
+        <!-- TECH STACK -->
+        <div class="mb-16">
+            <h3 class="text-3xl font-bold text-gray-800 mb-3">Tech Stack</h3>
+            <ul class="grid grid-cols-2 md:grid-cols-4 gap-4 text-gray-700">
+                <li class="bg-gray-100 p-3 rounded-lg text-center">Django</li>
+                <li class="bg-gray-100 p-3 rounded-lg text-center">TailwindCSS</li>
+                <li class="bg-gray-100 p-3 rounded-lg text-center">PostgreSQL</li>
+                <li class="bg-gray-100 p-3 rounded-lg text-center">Railway Hosting</li>
+            </ul>
+        </div>
+
+        <!-- TIMELINE -->
+        <div class="mb-16">
+            <h3 class="text-3xl font-bold text-gray-800 mb-3">Timeline</h3>
+            <p class="text-gray-600 text-lg">
+                Estimated by competitors: <strong>8 weeks</strong><br>
+                Delivered by me: <strong>7 days</strong>
+            </p>
+        </div>
+
+        <!-- CTA -->
+        <div class="text-center">
+            <a href="{% url 'contact' %}"
+               class="bg-purple-600 text-white px-10 py-4 rounded-lg font-semibold text-lg hover:bg-purple-700 transition">
+                Start Your Project
+            </a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

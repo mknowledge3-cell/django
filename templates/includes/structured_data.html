@@ -1,0 +1,72 @@
+{% load static %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://yourdomain.com/#organization",
+      "name": "Your Brand Name",
+      "url": "https://yourdomain.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "inLanguage": "en-US",
+        "@id": "https://yourdomain.com/#logo",
+        "url": "https://yourdomain.com/static/images/logo.png",
+        "contentUrl": "https://yourdomain.com/static/images/logo.png",
+        "width": 180,
+        "height": 60,
+        "caption": "Your Brand Name"
+      },
+      "description": "Professional web design and development services",
+      "sameAs": [
+        "https://twitter.com/yourbrand",
+        "https://linkedin.com/company/yourbrand"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://yourdomain.com/#website",
+      "url": "https://yourdomain.com/",
+      "name": "Your Brand Name",
+      "description": "Professional web design and development services",
+      "publisher": {
+        "@id": "https://yourdomain.com/#organization"
+      },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "Service",
+      "name": "Web Design & Development",
+      "description": "Custom website design and development services",
+      "provider": {
+        "@type": "Organization",
+        "name": "Your Brand Name"
+      },
+      "areaServed": "Worldwide",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Web Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Web Design",
+              "description": "Custom website design and development"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "E-commerce Development",
+              "description": "Online store development with payment integration"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
+</script>

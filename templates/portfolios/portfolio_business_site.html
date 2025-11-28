@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Case Study – Business Website{% endblock %}
+
+{% block content %}
+
+<section class="pt-24 pb-16 bg-gradient-to-r from-purple-600 to-blue-600 text-white">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+        <h1 class="text-5xl font-bold mb-4">Business Website</h1>
+        <p class="text-xl max-w-3xl mx-auto text-blue-100">
+            A modern, responsive business website designed for maximum clarity, branding, and conversions.
+        </p>
+    </div>
+</section>
+
+<section class="py-20 bg-white">
+    <div class="max-w-5xl mx-auto px-4">
+        <div class="mb-12">
+            <h2 class="text-4xl font-bold text-gray-800 mb-4">Overview</h2>
+            <p class="text-gray-600 text-lg">
+                This project required a clean, professional brand image with fast performance, SEO optimisation,
+                and a smooth mobile layout.
+            </p>
+        </div>
+        <h3 class="text-3xl font-bold text-gray-800 mb-4">Key Features</h3>
+        <ul class="space-y-3 text-gray-700 mb-10">
+            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Modern responsive design</li>
+            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Lead-capture contact forms</li>
+            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Optimized performance</li>
+            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>SEO-ready structure</li>
+        </ul>
+
+        <div class="mb-12">
+            <h3 class="text-3xl font-bold text-gray-800 mb-3">Tech Stack</h3>
+            <ul class="grid grid-cols-2 md:grid-cols-4 gap-4 text-gray-700">
+                <li class="bg-gray-100 p-3 rounded-lg text-center">HTML/Tailwind</li>
+                <li class="bg-gray-100 p-3 rounded-lg text-center">Django</li>
+                <li class="bg-gray-100 p-3 rounded-lg text-center">Railway</li>
+                <li class="bg-gray-100 p-3 rounded-lg text-center">SEO Tools</li>
+            </ul>
+        </div>
+
+        <div class="text-center">
+            <a href="{% url 'contact' %}"
+               class="bg-purple-600 text-white px-10 py-4 rounded-lg font-semibold text-lg hover:bg-purple-700 transition">
+                Start Your Project
+            </a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
