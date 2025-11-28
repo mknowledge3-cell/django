@@ -118,9 +118,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # CSRF Trusted Origins - Update with your actual domain
 CSRF_TRUSTED_ORIGINS = [
     "https://*.railway.app",
-    # Add your custom domain here once you have it
-    "https://khume.com",
-    "https://www.khume.com",
+    "https://khume.co.za",
+    "https://www.khume.co.za",
 ]
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
