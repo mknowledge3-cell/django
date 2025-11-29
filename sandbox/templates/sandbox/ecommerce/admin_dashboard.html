@@ -1,0 +1,123 @@
+{% extends 'sandbox/base_ecommerce.html' %}
+
+{% block content %}
+<div class="pt-12 pb-20 bg-gray-50 min-h-screen">
+    <div class="max-w-7xl mx-auto px-4">
+        <!-- Admin Header -->
+        <div class="bg-white rounded-2xl shadow-sm p-6 mb-8">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800">Admin Dashboard</h1>
+                    <p class="text-gray-600">Manage your UrbanStyle store</p>
+                </div>
+                <div class="text-sm text-gray-500">
+                    Store Manager
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white rounded-2xl p-6 shadow-sm">
+                <div class="text-2xl font-bold text-red-600 mb-2">{{ total_orders }}</div>
+                <div class="text-gray-600">Total Orders</div>
+            </div>
+            <div class="bg-white rounded-2xl p-6 shadow-sm">
+                <div class="text-2xl font-bold text-green-600 mb-2">R{{ total_revenue }}</div>
+                <div class="text-gray-600">Total Revenue</div>
+            </div>
+            <div class="bg-white rounded-2xl p-6 shadow-sm">
+                <div class="text-2xl font-bold text-blue-600 mb-2">{{ demo_data.products|length }}</div>
+                <div class="text-gray-600">Products</div>
+            </div>
+            <div class="bg-white rounded-2xl p-6 shadow-sm">
+                <div class="text-2xl font-bold text-orange-600 mb-2">{{ low_stock_products|length }}</div>
+                <div class="text-gray-600">Out of Stock</div>
+            </div>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-8">
+            <!-- Recent Orders -->
+            <div class="bg-white rounded-2xl shadow-sm p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Recent Orders</h2>
+                {% if demo_data.orders %}
+                <div class="space-y-4">
+                    {% for order in demo_data.orders|slice:":5" %}
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Order #{{ order.order_number }}</h3>
+                                <p class="text-gray-600 text-sm">{{ order.customer.name }}</p>
+                            </div>
+                            <span class="bg-green-100 text-green-600 px-2 py-1 rounded text-xs font-medium capitalize">
+                                {{ order.status }}
+                            </span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm text-gray-500">
+                            <span>{{ order.date }}</span>
+                            <span class="font-semibold text-gray-800">R{{ order.total }}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p class="text-gray-500 text-center py-8">No orders yet. Try placing an order!</p>
+                {% endif %}
+            </div>
+
+            <!-- Product Management -->
+            <div class="bg-white rounded-2xl shadow-sm p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Product Management</h2>
+                
+                <!-- Low Stock Alert -->
+                {% if low_stock_products %}
+                <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
+                    <h3 class="font-semibold text-yellow-800 mb-2">Low Stock Alert</h3>
+                    <div class="space-y-2">
+                        {% for product in low_stock_products %}
+                        <p class="text-sm text-yellow-700">{{ product.name }} - Out of Stock</p>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Product List -->
+                <div class="space-y-3">
+                    {% for product in demo_data.products|slice:":4" %}
+                    <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-gradient-to-br from-gray-200 to-gray-300 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-tshirt text-gray-400 text-sm"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium text-gray-800 text-sm">{{ product.name }}</p>
+                                <p class="text-xs text-gray-600">R{{ product.price }}</p>
+                            </div>
+                        </div>
+                        <span class="text-xs {% if product.in_stock %}text-green-600{% else %}text-red-600{% endif %} font-medium">
+                            {% if product.in_stock %}In Stock{% else %}Out of Stock{% endif %}
+                        </span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="bg-white rounded-2xl shadow-sm p-6 mt-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Quick Actions</h2>
+            <div class="grid md:grid-cols-3 gap-4">
+                <a href="{% url 'ecommerce_demo' %}" class="bg-red-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-red-700 transition duration-300 text-center">
+                    View Store
+                </a>
+                <a href="{% url 'ecommerce_products_demo' %}" class="bg-gray-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-gray-700 transition duration-300 text-center">
+                    Manage Products
+                </a>
+                <a href="{% url 'reset_ecommerce_demo' %}" class="bg-gray-800 text-white py-3 px-6 rounded-lg font-semibold hover:bg-gray-900 transition duration-300 text-center">
+                    Reset Demo
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

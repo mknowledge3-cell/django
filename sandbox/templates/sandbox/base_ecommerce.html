@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ demo_data.store_name }} - {{ demo_data.tagline }}{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .demo-banner {
+            background: linear-gradient(90deg, #e53e3e, #c53030);
+            color: white;
+            padding: 8px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .brand-bg {
+            background-color: {{ demo_data.brand_colors.primary }};
+        }
+        .brand-text {
+            color: {{ demo_data.brand_colors.primary }};
+        }
+        .accent-bg {
+            background-color: {{ demo_data.brand_colors.secondary }};
+        }
+        .accent-text {
+            color: {{ demo_data.brand_colors.secondary }};
+        }
+        .hover-lift:hover {
+            transform: translateY(-2px);
+            transition: transform 0.2s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-50" style="--brand-primary: {{ demo_data.brand_colors.primary }}; --brand-accent: {{ demo_data.brand_colors.secondary }};">
+    <!-- Demo Warning Banner -->
+    <div class="demo-banner">
+        🛍️ E-COMMERCE STORE DEMO - Fully functional online store preview
+        <a href="{% url 'reset_ecommerce_demo' %}" class="underline ml-2">Reset Demo</a>
+        {% if request.session.ecommerce_user %}
+        <span class="ml-4">Logged in as {{ request.session.ecommerce_user.email }}</span>
+        {% endif %}
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg border-b">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <!-- Store Logo & Name -->
+                <div class="flex items-center space-x-4">
+                    <div class="w-10 h-10 bg-gray-900 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">US</span>
+                    </div>
+                    <div>
+                        <div class="text-xl font-bold text-gray-900">{{ demo_data.store_name }}</div>
+                        <div class="text-xs text-gray-500">{{ demo_data.tagline }}</div>
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="{% url 'ecommerce_demo' %}" class="text-gray-700 hover:text-red-600 font-medium">Home</a>
+                    <a href="{% url 'ecommerce_products_demo' %}" class="text-gray-700 hover:text-red-600 font-medium">Shop</a>
+
+                    <!-- Categories Dropdown -->
+                    <div class="relative group">
+                        <button class="text-gray-700 hover:text-red-600 font-medium flex items-center">
+                            Categories <i class="fas fa-chevron-down ml-1 text-sm"></i>
+                        </button>
+                        <div class="absolute left-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border">
+                            {% for category in demo_data.categories %}
+                            <a href="{% url 'ecommerce_products_demo' %}?category={{ category.id }}"
+                               class="block px-4 py-2 text-gray-700 hover:bg-red-50 hover:text-red-600">
+                                {{ category.name }} ({{ category.count }})
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <!-- Cart Icon -->
+                    <a href="{% url 'ecommerce_cart_demo' %}" class="relative text-gray-700 hover:text-red-600">
+                        <i class="fas fa-shopping-bag text-xl"></i>
+                        {% if demo_data.cart %}
+                        <span class="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                            {{ demo_data.cart|length }}
+                        </span>
+                        {% endif %}
+                    </a>
+
+                    <!-- User Account -->
+                    {% if request.session.ecommerce_user %}
+                        {% if request.session.ecommerce_user.role == 'admin' %}
+                        <a href="{% url 'ecommerce_admin_demo' %}" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition">Admin</a>
+                        {% endif %}
+                        <a href="{% url 'ecommerce_logout_demo' %}" class="text-gray-700 hover:text-red-600">Logout</a>
+                    {% else %}
+                        <a href="{% url 'ecommerce_login_demo' %}" class="text-gray-700 hover:text-red-600">Login</a>
+                    {% endif %}
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="menu-btn" class="text-gray-700">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white px-4 pb-4 border-t">
+            <a href="{% url 'ecommerce_demo' %}" class="block py-2 text-gray-700 hover:text-red-600">Home</a>
+            <a href="{% url 'ecommerce_products_demo' %}" class="block py-2 text-gray-700 hover:text-red-600">Shop</a>
+            <div class="pl-4 border-l-2 border-gray-200 ml-2">
+                <div class="text-sm text-gray-500 py-1">Categories:</div>
+                {% for category in demo_data.categories %}
+                <a href="{% url 'ecommerce_products_demo' %}?category={{ category.id }}"
+                   class="block py-1 text-gray-700 hover:text-red-600 pl-4 text-sm">
+                    {{ category.name }}
+                </a>
+                {% endfor %}
+            </div>
+            <a href="{% url 'ecommerce_cart_demo' %}" class="block py-2 text-gray-700 hover:text-red-600">
+                Cart {% if demo_data.cart %}({{ demo_data.cart|length }}){% endif %}
+            </a>
+            {% if request.session.ecommerce_user %}
+                {% if request.session.ecommerce_user.role == 'admin' %}
+                <a href="{% url 'ecommerce_admin_demo' %}" class="block py-2 text-red-600 font-medium">Admin</a>
+                {% endif %}
+                <a href="{% url 'ecommerce_logout_demo' %}" class="block py-2 text-gray-700 hover:text-red-600">Logout</a>
+            {% else %}
+                <a href="{% url 'ecommerce_login_demo' %}" class="block py-2 text-gray-700 hover:text-red-600">Login</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="flex items-center justify-center space-x-3 mb-4">
+                <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+                    <span class="text-gray-900 font-bold text-sm">US</span>
+                </div>
+                <span class="text-xl font-bold">{{ demo_data.store_name }}</span>
+            </div>
+            <p class="text-gray-400 mb-6">This is a live demo of a complete e-commerce store.</p>
+            <div class="mt-4">
+                <a href="{% url 'contact' %}?service=ecommerce-store"
+                   class="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition duration-300">
+                    Get Your Own Store
+                </a>
+            </div>
+            <div class="mt-6 text-sm text-gray-500">
+                <p>Demo Store • Not a real business</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menu-btn')?.addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>

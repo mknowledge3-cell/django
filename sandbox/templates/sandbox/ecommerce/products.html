@@ -1,0 +1,107 @@
+{% extends 'sandbox/base_ecommerce.html' %}
+{% load math_filters %}
+
+{% block content %}
+<!-- Products Header -->
+<section class="bg-white py-12 border-b">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-800 mb-2">
+                    {% if current_category != 'all' %}
+                        {{ demo_data.categories|category_name:current_category }}
+                    {% else %}
+                        All Products
+                    {% endif %}
+                </h1>
+                <p class="text-gray-600">
+                    {% if current_category != 'all' %}
+                        {{ products|length }} items found
+                    {% else %}
+                        Browse our complete collection
+                    {% endif %}
+                </p>
+            </div>
+            
+            <!-- Category Filter -->
+            <div class="mt-4 md:mt-0">
+                <select onchange="window.location.href='{% url 'ecommerce_products_demo' %}?category='+this.value" 
+                        class="border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-red-600 focus:border-transparent">
+                    <option value="all" {% if current_category == 'all' %}selected{% endif %}>All Categories</option>
+                    {% for category in demo_data.categories %}
+                    <option value="{{ category.id }}" {% if current_category == category.id %}selected{% endif %}>
+                        {{ category.name }} ({{ category.count }})
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Products Grid -->
+<section class="py-12 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4">
+        {% if products %}
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            {% for product in products %}
+            <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover-lift">
+                <div class="h-64 bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center relative">
+                    <!-- Sale Badge -->
+                    {% if product.original_price > product.price %}
+                    <div class="absolute top-4 left-4 bg-red-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                        SALE
+                    </div>
+                    {% endif %}
+                    
+                    <!-- Out of Stock Badge -->
+                    {% if not product.in_stock %}
+                    <div class="absolute top-4 left-4 bg-gray-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                        OUT OF STOCK
+                    </div>
+                    {% endif %}
+                    
+                    <i class="fas fa-tshirt text-gray-400 text-6xl"></i>
+                </div>
+                
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">{{ product.name }}</h3>
+                    <p class="text-gray-600 text-sm mb-4 line-clamp-2">{{ product.description }}</p>
+                    
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center space-x-2">
+                            {% if product.original_price > product.price %}
+                            <span class="text-lg font-bold text-gray-900">R{{ product.price }}</span>
+                            <span class="text-sm text-gray-500 line-through">R{{ product.original_price }}</span>
+                            {% else %}
+                            <span class="text-lg font-bold text-gray-900">R{{ product.price }}</span>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <i class="fas fa-star text-yellow-400 text-sm"></i>
+                            <span class="text-sm text-gray-600 ml-1">{{ product.rating }}</span>
+                        </div>
+                    </div>
+                    
+                    <a href="{% url 'ecommerce_product_detail_demo' product.id %}" 
+                       class="w-full bg-gray-900 text-white py-3 rounded-lg font-semibold hover:bg-red-600 transition duration-300 text-center block">
+                        {% if product.in_stock %}View Product{% else %}Out of Stock{% endif %}
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="text-center py-16">
+            <i class="fas fa-search text-gray-300 text-6xl mb-4"></i>
+            <h3 class="text-2xl font-bold text-gray-800 mb-2">No products found</h3>
+            <p class="text-gray-600 mb-6">Try selecting a different category.</p>
+            <a href="{% url 'ecommerce_products_demo' %}" class="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition">
+                View All Products
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

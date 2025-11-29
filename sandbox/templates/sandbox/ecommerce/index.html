@@ -1,0 +1,175 @@
+{% extends 'sandbox/base_ecommerce.html' %}
+{% load icon_filters %}
+{% block content %}
+<!-- Hero Section -->
+<section class="bg-gradient-to-r from-gray-900 to-gray-800 text-white py-20">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h1 class="text-5xl font-bold mb-6">Elevate Your Style</h1>
+                <p class="text-xl mb-8 text-gray-300">
+                    Discover premium urban fashion that combines comfort, quality, and contemporary design.
+                </p>
+                <div class="flex space-x-4">
+                    <a href="{% url 'ecommerce_products_demo' %}" 
+                       class="bg-red-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-red-700 transition duration-300">
+                        Shop Collection
+                    </a>
+                    <a href="{% url 'ecommerce_products_demo' %}?category=new" 
+                       class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-gray-900 transition duration-300">
+                        New Arrivals
+                    </a>
+                </div>
+            </div>
+            <div class="flex justify-center">
+                <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+                    <i class="fas fa-tshirt text-6xl text-white mb-4"></i>
+                    <h3 class="text-2xl font-bold mb-2">Premium Quality</h3>
+                    <p class="text-gray-300">Crafted with attention to detail</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Categories -->
+<section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-800 mb-4">Shop by Category</h2>
+            <p class="text-xl text-gray-600">Explore our curated collections</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {% for category in demo_data.categories %}
+            <a href="{% url 'ecommerce_products_demo' %}?category={{ category.id }}" 
+               class="bg-gray-50 rounded-2xl p-8 text-center hover-lift border border-gray-200 group">
+                <div class="w-16 h-16 bg-gray-900 rounded-lg flex items-center justify-center mx-auto mb-4 group-hover:bg-red-600 transition duration-300">
+                    <i class="fas fa-{{ category.id|icon_for_category }} text-white text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">{{ category.name }}</h3>
+                <p class="text-gray-600">{{ category.count }} items</p>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Featured Products -->
+<section class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-800 mb-4">Featured Products</h2>
+            <p class="text-xl text-gray-600">Best sellers and customer favorites</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for product in demo_data.products|slice:":3" %}
+            <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover-lift">
+                <div class="h-64 bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center relative">
+                    <!-- Sale Badge -->
+                    {% if product.original_price > product.price %}
+                    <div class="absolute top-4 left-4 bg-red-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                        SALE
+                    </div>
+                    {% endif %}
+                    
+                    <!-- Out of Stock Badge -->
+                    {% if not product.in_stock %}
+                    <div class="absolute top-4 left-4 bg-gray-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                        OUT OF STOCK
+                    </div>
+                    {% endif %}
+                    
+                    <i class="fas fa-tshirt text-gray-400 text-6xl"></i>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">{{ product.name }}</h3>
+                    <p class="text-gray-600 text-sm mb-4">{{ product.description }}</p>
+                    
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center space-x-2">
+                            {% if product.original_price > product.price %}
+                            <span class="text-lg font-bold text-gray-900">R{{ product.price }}</span>
+                            <span class="text-sm text-gray-500 line-through">R{{ product.original_price }}</span>
+                            {% else %}
+                            <span class="text-lg font-bold text-gray-900">R{{ product.price }}</span>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <span class="text-sm text-gray-600 ml-1">{{ product.rating }}</span>
+                            <span class="text-sm text-gray-500 ml-1">({{ product.review_count }})</span>
+                        </div>
+                    </div>
+                    
+                    <a href="{% url 'ecommerce_product_detail_demo' product.id %}" 
+                       class="w-full bg-gray-900 text-white py-3 rounded-lg font-semibold hover:bg-red-600 transition duration-300 text-center block">
+                        View Product
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="text-center mt-12">
+            <a href="{% url 'ecommerce_products_demo' %}" 
+               class="bg-red-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-red-700 transition duration-300">
+                View All Products
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Store Features -->
+<section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="grid md:grid-cols-3 gap-8 text-center">
+            <div class="p-8">
+                <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-shipping-fast text-red-600 text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Free Shipping</h3>
+                <p class="text-gray-600">Free delivery on orders over R500</p>
+            </div>
+
+            <div class="p-8">
+                <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-undo-alt text-red-600 text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Easy Returns</h3>
+                <p class="text-gray-600">30-day return policy, no questions asked</p>
+            </div>
+
+            <div class="p-8">
+                <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-shield-alt text-red-600 text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Secure Payment</h3>
+                <p class="text-gray-600">Your payment information is safe with us</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Demo Instructions -->
+<section class="py-16 bg-gray-100 border-t">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+        <h3 class="text-2xl font-bold text-gray-800 mb-4">Want to Explore the Full Experience?</h3>
+        <p class="text-gray-600 mb-6">Try these demo accounts to experience different user roles:</p>
+        <div class="grid md:grid-cols-2 gap-4 text-sm max-w-md mx-auto">
+            <div class="bg-white p-4 rounded-lg border">
+                <div class="font-semibold text-gray-800">Customer Account</div>
+                <div class="text-gray-600">Email: customer@urbanstyle.com</div>
+                <div class="text-gray-600">Password: demo123</div>
+            </div>
+            <div class="bg-white p-4 rounded-lg border">
+                <div class="font-semibold text-gray-800">Admin Account</div>
+                <div class="text-gray-600">Email: admin@urbanstyle.com</div>
+                <div class="text-gray-600">Password: demo123</div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
