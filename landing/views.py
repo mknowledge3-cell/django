@@ -126,6 +126,17 @@ from django.conf import settings
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 
+import requests
+import urllib.parse
+
+def send_whatsapp_notification(phone, api_key, message):
+    try:
+        encoded_message = urllib.parse.quote(message)
+        url = f"https://api.callmebot.com/whatsapp.php?phone={phone}&apikey={api_key}&text={encoded_message}"
+        requests.get(url, timeout=10)
+    except Exception as e:
+        print("WhatsApp notification error:", e)
+
 def contact_view(request):
 
     # Capture prefilled query parameters or defaults
@@ -273,6 +284,11 @@ def contact_view(request):
               </td></tr>
             </table>
             """
+        )
+        send_whatsapp_notification(
+            phone="27787779683",
+            api_key="9464038",
+            message=f"New enquiry from {name}. Service: {service}. Check your email."
         )
 
         api_instance.send_transac_email(confirmation_email)
