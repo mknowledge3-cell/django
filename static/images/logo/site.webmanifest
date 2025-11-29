@@ -1,0 +1,22 @@
+{
+    "name": "khume - Web Design & Development",
+    "short_name": "khume",
+    "description": "Professional web design and development services",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#6b21a8",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "{% static 'images/logo/icon-192.png' %}",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "{% static 'images/logo/icon-512.png' %}",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

@@ -6,7 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="{% block meta_description %}Professional web design and development services. Custom websites, e-commerce solutions, membership portals, and web applications.{% endblock %}">
     <meta name="keywords" content="{% block meta_keywords %}web design, web development, e-commerce, membership sites, web applications, django, python{% endblock %}">
-    <meta name="author" content="Your Brand Name">
+    <meta name="author" content="khume">
+
+    <!-- Favicon & App Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/logo/favicon/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/logo/favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/logo/favicon/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'images/logo/site.webmanifest' %}">
+    <link rel="shortcut icon" href="{% static 'images/logo/khume_logo@0.25x.png' %}">
+    <meta name="msapplication-TileColor" content="#6b21a8">
+    <meta name="theme-color" content="#6b21a8">
 
     <!-- Open Graph / Social Media -->
     <meta property="og:title" content="{% block og_title %}{% block title %}Your Web Design Business{% endblock %}{% endblock %}">
@@ -44,7 +53,16 @@
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between items-center py-4">
                 <div class="flex items-center">
-                    <span class="text-2xl font-bold text-purple-600">khume</span>
+                    <!-- Logo with image + text -->
+                    <a href="{% url 'home' %}" class="flex items-center space-x-3">
+                        <!-- Logo Image -->
+                        <img src="{% static 'images/logo/khume_logo.png' %}"
+                             alt="khume Logo"
+                             class="h-8 w-auto"
+                             onerror="this.style.display='none'">
+                        <!-- Logo Text -->
+                        <span class="logo-text text-2xl text-purple-600">khume</span>
+                    </a>
                 </div>
 
                 <div class="hidden md:flex items-center space-x-8">

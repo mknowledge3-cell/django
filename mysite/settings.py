@@ -115,6 +115,8 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -129,5 +131,3 @@ CSRF_TRUSTED_ORIGINS = [
 # EMAIL_TIMEOUT = 10  # 10 seconds timeout
 
 BREVO_API_KEY = os.getenv("BREVO_API_KEY")
-
-print("BREVO KEY:", BREVO_API_KEY)
