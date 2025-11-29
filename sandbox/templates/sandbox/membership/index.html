@@ -1,0 +1,129 @@
+{% extends 'sandbox/base_membership.html' %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="premium-gradient text-white pt-16 pb-20">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+        <h1 class="text-5xl font-bold mb-6">Unlock Your Learning Potential</h1>
+        <p class="text-xl mb-8 text-orange-100 max-w-3xl mx-auto">
+            {{ demo_data.tagline }}
+        </p>
+        <div class="flex space-x-4 justify-center">
+            <a href="#pricing" class="bg-white text-orange-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300">
+                View Plans
+            </a>
+            <a href="{% url 'membership_register_demo' %}" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-orange-600 transition duration-300">
+                Start Free Trial
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Features -->
+<section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-800 mb-4">Why Join Our Community?</h2>
+            <p class="text-xl text-gray-600">Access exclusive content, connect with experts, and accelerate your growth</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="text-center p-8">
+                <div class="w-20 h-20 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-video text-green-600 text-3xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">Premium Courses</h3>
+                <p class="text-gray-600">Access exclusive video content and masterclasses from industry leaders.</p>
+            </div>
+
+            <div class="text-center p-8">
+                <div class="w-20 h-20 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-users text-blue-600 text-3xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">Community</h3>
+                <p class="text-gray-600">Connect with like-minded learners and experts in our private forums.</p>
+            </div>
+
+            <div class="text-center p-8">
+                <div class="w-20 h-20 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-download text-purple-600 text-3xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">Resources</h3>
+                <p class="text-gray-600">Download templates, tools, and resources to apply your learning.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pricing -->
+<section id="pricing" class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-800 mb-4">Choose Your Plan</h2>
+            <p class="text-xl text-gray-600">Start free, upgrade anytime. No long-term contracts.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {% for tier in demo_data.pricing_tiers %}
+            <div class="bg-white rounded-2xl p-8 {% if tier.highlighted %}ring-2 ring-orange-500 transform scale-105{% endif %} shadow-lg">
+                {% if tier.highlighted %}
+                <div class="bg-orange-500 text-white text-sm font-semibold px-4 py-1 rounded-full inline-block mb-4">
+                    MOST POPULAR
+                </div>
+                {% endif %}
+                
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">{{ tier.name }}</h3>
+                <div class="mb-6">
+                    <span class="text-4xl font-bold text-gray-800">{{ tier.price }}</span>
+                    <span class="text-gray-600">/{{ tier.period }}</span>
+                </div>
+                
+                <ul class="space-y-4 mb-8">
+                    {% for feature in tier.features %}
+                    <li class="flex items-center">
+                        <i class="fas fa-check text-green-500 mr-3"></i>
+                        <span class="text-gray-700">{{ feature }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+                
+                {% if tier.name == 'Free' %}
+                <a href="{% url 'membership_register_demo' %}?tier=free" 
+                   class="w-full bg-gray-600 text-white py-3 rounded-lg font-semibold hover:bg-gray-700 transition duration-300 text-center block">
+                    {{ tier.button_text }}
+                </a>
+                {% elif tier.name == 'Pro' %}
+                <a href="{% url 'membership_register_demo' %}?tier=pro" 
+                   class="w-full bg-orange-600 text-white py-3 rounded-lg font-semibold hover:bg-orange-700 transition duration-300 text-center block">
+                    {{ tier.button_text }}
+                </a>
+                {% else %}
+                <a href="{% url 'contact' %}?service=enterprise-membership" 
+                   class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300 text-center block">
+                    {{ tier.button_text }}
+                </a>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Demo Accounts Info -->
+<section class="py-16 bg-white border-t">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+        <h3 class="text-2xl font-bold text-gray-800 mb-4">Want to Explore?</h3>
+        <p class="text-gray-600 mb-6">Use these demo accounts to experience different membership levels:</p>
+        <div class="grid md:grid-cols-3 gap-4 text-sm">
+            {% for user_type, user_data in demo_data.demo_users.items %}
+            <div class="bg-gray-50 p-4 rounded-lg">
+                <div class="font-semibold text-gray-800 capitalize">{{ user_type }} Account</div>
+                <div class="text-gray-600">Email: {{ user_data.email }}</div>
+                <div class="text-gray-600">Password: demo123</div>
+            </div>
+            {% endfor %}
+        </div>
+        <p class="text-gray-500 text-sm mt-4">Or <a href="{% url 'membership_register_demo' %}" class="text-green-600 hover:underline">create a new account</a> to test the registration flow.</p>
+    </div>
+</section>
+{% endblock %}

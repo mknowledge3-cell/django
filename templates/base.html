@@ -51,6 +51,23 @@
                     <a href="{% url 'home' %}" class="text-gray-700 hover:text-purple-600 font-medium">Home</a>
                     <a href="{% url 'services' %}" class="text-gray-700 hover:text-purple-600 font-medium">Services</a>
                     <a href="{% url 'portfolio' %}" class="text-gray-700 hover:text-purple-600 font-medium">Portfolio</a>
+
+                    <!-- Dropdown for Demos -->
+                    <div class="relative group">
+                        <button class="text-gray-700 hover:text-purple-600 font-medium flex items-center">
+                            Live Demos
+                            <i class="fas fa-chevron-down ml-1 text-sm"></i>
+                        </button>
+                        <div class="absolute left-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border">
+                            <a href="{% url 'business_demo' %}" class="block px-4 py-2 text-gray-700 hover:bg-purple-50 hover:text-purple-600" target="_blank">
+                                Business Website
+                            </a>
+                            <a href="{% url 'membership_demo' %}" class="block px-4 py-2 text-gray-700 hover:bg-purple-50 hover:text-purple-600" target="_blank">
+                                Membership Portal
+                            </a>
+                        </div>
+                    </div>
+
                     <a href="{% url 'contact' %}" class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition duration-300">Get Started</a>
                 </div>
 
@@ -68,6 +85,18 @@
             <a href="{% url 'home' %}" class="block py-2 text-gray-700 hover:text-purple-600">Home</a>
             <a href="{% url 'services' %}" class="block py-2 text-gray-700 hover:text-purple-600">Services</a>
             <a href="{% url 'portfolio' %}" class="block py-2 text-gray-700 hover:text-purple-600">Portfolio</a>
+
+            <!-- Mobile Demo Links -->
+            <div class="border-t border-gray-200 mt-2 pt-2">
+                <div class="text-sm text-gray-500 px-2 py-1">Live Demos:</div>
+                <a href="{% url 'business_demo' %}" class="block py-2 text-gray-700 hover:text-purple-600 pl-4">
+                    🏢 Business Website
+                </a>
+                <a href="{% url 'membership_demo' %}" class="block py-2 text-gray-700 hover:text-purple-600 pl-4">
+                    🔐 Membership Portal
+                </a>
+            </div>
+
             <a href="{% url 'contact' %}" class="block py-2 text-purple-600 font-medium">Get Started</a>
         </div>
     </nav>

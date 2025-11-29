@@ -306,3 +306,6 @@ def contact_view(request):
         "service": service,
         "message": message_text,
     })
+
+class DemosView(TemplateView):
+    template_name = 'landing/demos.html'

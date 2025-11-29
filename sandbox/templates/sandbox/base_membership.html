@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ demo_data.site_name }} - {{ demo_data.tagline }}{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .demo-banner {
+            background: linear-gradient(90deg, #10b981, #059669);
+            color: white;
+            padding: 8px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .premium-gradient {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+        .enterprise-gradient {
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Demo Warning Banner -->
+    <div class="demo-banner">
+        🎯 MEMBERSHIP PORTAL DEMO - Experience tiered access & content gating
+        <a href="{% url 'reset_membership_demo' %}" class="underline ml-2">Reset Demo</a>
+        {% if request.session.membership_user %}
+        <a href="{% url 'membership_logout_demo' %}" class="bg-white text-green-600 px-3 py-1 rounded ml-4 text-sm font-semibold">Logout</a>
+        {% endif %}
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold text-green-600">{{ demo_data.site_name }}</span>
+                </div>
+
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="{% url 'membership_demo' %}" class="text-gray-700 hover:text-green-600 font-medium">Home</a>
+                    {% if request.session.membership_user %}
+                        <a href="{% url 'membership_dashboard_demo' %}" class="text-gray-700 hover:text-green-600 font-medium">Dashboard</a>
+                        <a href="{% url 'membership_premium_content_demo' %}" class="text-gray-700 hover:text-green-600 font-medium">Premium Content</a>
+                        {% if request.session.membership_user.type == 'admin' %}
+                        <a href="{% url 'membership_admin_demo' %}" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition">Admin</a>
+                        {% endif %}
+                        <span class="text-sm text-gray-500">Logged in as {{ request.session.membership_user.email }}</span>
+                    {% else %}
+                        <a href="{% url 'membership_login_demo' %}" class="text-gray-700 hover:text-green-600 font-medium">Login</a>
+                        <a href="{% url 'membership_register_demo' %}" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition duration-300">Sign Up Free</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-gray-400">This is a live demo of a membership portal with tiered access control.</p>
+            <div class="mt-4">
+                <a href="{% url 'contact' %}?service=membership-portal" class="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition duration-300">
+                    Build Your Membership Site
+                </a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

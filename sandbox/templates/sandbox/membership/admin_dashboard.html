@@ -1,0 +1,117 @@
+{% extends 'sandbox/base_membership.html' %}
+
+{% block content %}
+<div class="pt-16 pb-20 bg-gray-50 min-h-screen">
+    <div class="max-w-7xl mx-auto px-4">
+        <!-- Admin Header -->
+        <div class="bg-white rounded-2xl shadow-sm p-6 mb-8">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800">Admin Dashboard</h1>
+                    <p class="text-gray-600">Manage your membership platform</p>
+                </div>
+                <div class="text-sm text-gray-500">
+                    Logged in as: {{ user.email }}
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white rounded-2xl p-6 shadow-sm">
+                <div class="text-2xl font-bold text-purple-600 mb-2">{{ demo_data.members|length }}</div>
+                <div class="text-gray-600">Total Members</div>
+            </div>
+            <div class="bg-white rounded-2xl p-6 shadow-sm">
+                <div class="text-2xl font-bold text-green-600 mb-2">
+                    {{ demo_data.members|length|add:"-1" }}
+                </div>
+                <div class="text-gray-600">Active Members</div>
+            </div>
+            <div class="bg-white rounded-2xl p-6 shadow-sm">
+                <div class="text-2xl font-bold text-blue-600 mb-2">
+                    {{ demo_data.content_access_log|length }}
+                </div>
+                <div class="text-gray-600">Content Accesses</div>
+            </div>
+            <div class="bg-white rounded-2xl p-6 shadow-sm">
+                <div class="text-2xl font-bold text-orange-600 mb-2">3</div>
+                <div class="text-gray-600">Pricing Tiers</div>
+            </div>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-8">
+            <!-- Member Management -->
+            <div class="bg-white rounded-2xl shadow-sm p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Member Management</h2>
+                {% if demo_data.members %}
+                <div class="space-y-4">
+                    {% for member in demo_data.members %}
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h3 class="font-semibold text-gray-800">{{ member.name }}</h3>
+                                <p class="text-gray-600 text-sm">{{ member.email }}</p>
+                            </div>
+                            {% with is_pro=member.tier|slice:":3" == "pro" %}
+                            <span class="bg-{{ is_pro|yesno:'orange,green' }}-100 text-{{ is_pro|yesno:'orange,green' }}-600 px-2 py-1 rounded text-xs font-medium capitalize">
+                                {{ member.tier }}
+                            </span>
+                            {% endwith %}
+                        </div>
+                        <div class="flex justify-between items-center text-sm text-gray-500">
+                            <span>Joined: {{ member.join_date }}</span>
+                            <span class="bg-green-100 text-green-600 px-2 py-1 rounded">Active</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p class="text-gray-500 text-center py-8">No members yet. Try registering a new account!</p>
+                {% endif %}
+            </div>
+
+            <!-- Content Access Log -->
+            <div class="bg-white rounded-2xl shadow-sm p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Recent Activity</h2>
+                {% if demo_data.content_access_log %}
+                <div class="space-y-3 max-h-96 overflow-y-auto">
+                    {% for log in demo_data.content_access_log|slice:":10" %}
+                    <div class="border-l-4 {% if log.access_granted %}border-green-500{% else %}border-red-500{% endif %} pl-4 py-2">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <div class="font-medium text-gray-800">{{ log.user }}</div>
+                                <div class="text-sm text-gray-600">Accessed: {{ log.content }}</div>
+                            </div>
+                            <span class="text-xs {% if log.access_granted %}text-green-600{% else %}text-red-600{% endif %} font-medium">
+                                {% if log.access_granted %}Allowed{% else %}Denied{% endif %}
+                            </span>
+                        </div>
+                        <div class="text-xs text-gray-500 mt-1">{{ log.timestamp }}</div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p class="text-gray-500 text-center py-8">No activity yet. Try accessing premium content!</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="bg-white rounded-2xl shadow-sm p-6 mt-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Admin Actions</h2>
+            <div class="grid md:grid-cols-3 gap-4">
+                <a href="{% url 'membership_dashboard_demo' %}" class="bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition duration-300 text-center">
+                    View Member Dashboard
+                </a>
+                <a href="{% url 'membership_premium_content_demo' %}" class="bg-green-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-green-700 transition duration-300 text-center">
+                    Test Premium Content
+                </a>
+                <a href="{% url 'reset_membership_demo' %}" class="bg-red-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-red-700 transition duration-300 text-center">
+                    Reset Demo Data
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

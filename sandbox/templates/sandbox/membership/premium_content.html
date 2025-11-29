@@ -1,0 +1,99 @@
+{% extends 'sandbox/base_membership.html' %}
+
+{% block content %}
+<div class="pt-16 pb-20 bg-gray-50 min-h-screen">
+    <div class="max-w-4xl mx-auto px-4">
+        <!-- Header -->
+        <div class="bg-white rounded-2xl shadow-sm p-6 mb-8 text-center">
+            <h1 class="text-3xl font-bold text-gray-800 mb-4">Premium Content</h1>
+            <p class="text-gray-600">Exclusive resources for our Pro and Enterprise members</p>
+        </div>
+
+        {% if user.tier in 'pro enterprise admin' %}
+        <!-- Premium Content (Visible to Pro+ users) -->
+        <div class="bg-white rounded-2xl shadow-sm p-6 mb-8">
+            <div class="text-center mb-8">
+                <div class="w-20 h-20 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-unlock text-green-600 text-3xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800">Access Granted! 🎉</h2>
+                <p class="text-gray-600 mt-2">You have full access to our premium content library.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                {% for course in demo_data.courses.premium %}
+                <div class="border border-green-200 rounded-lg p-6 bg-green-50">
+                    <div class="flex items-start justify-between mb-4">
+                        <h3 class="text-xl font-bold text-gray-800">{{ course.title }}</h3>
+                        <span class="bg-green-100 text-green-600 px-2 py-1 rounded text-xs font-medium">Premium</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">{{ course.description }}</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-500">{{ course.duration }}</span>
+                        <button class="bg-green-600 text-white px-4 py-2 rounded text-sm font-semibold hover:bg-green-700 transition">
+                            Start Learning
+                        </button>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Additional Premium Features -->
+            <div class="mt-8 p-6 bg-blue-50 rounded-lg border border-blue-200">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Additional Premium Benefits</h3>
+                <div class="grid md:grid-cols-2 gap-4 text-sm">
+                    <div class="flex items-center">
+                        <i class="fas fa-download text-blue-600 mr-3"></i>
+                        <span>Download all course materials</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-certificate text-blue-600 mr-3"></i>
+                        <span>Completion certificates</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-video text-blue-600 mr-3"></i>
+                        <span>HD video streaming</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-headset text-blue-600 mr-3"></i>
+                        <span>Priority support</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <!-- Upgrade Prompt (Visible to Free users) -->
+        <div class="bg-white rounded-2xl shadow-sm p-8 text-center">
+            <div class="w-20 h-20 bg-orange-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-lock text-orange-600 text-3xl"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Premium Content Locked 🔒</h2>
+            <p class="text-gray-600 mb-6">
+                This content is available only for Pro and Enterprise members. 
+                Upgrade your account to unlock exclusive courses, resources, and features.
+            </p>
+            <div class="space-y-4 max-w-sm mx-auto">
+                <a href="{% url 'membership_demo' %}#pricing" 
+                   class="w-full bg-orange-600 text-white py-3 rounded-lg font-semibold hover:bg-orange-700 transition duration-300 text-center block">
+                    Upgrade to Pro - R299/month
+                </a>
+                <a href="{% url 'membership_dashboard_demo' %}" 
+                   class="w-full bg-gray-600 text-white py-3 rounded-lg font-semibold hover:bg-gray-700 transition duration-300 text-center block">
+                    Back to Dashboard
+                </a>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Access Log (Demo Info) -->
+        <div class="bg-gray-100 rounded-lg p-4 mt-8">
+            <h4 class="font-semibold text-gray-800 mb-2">Demo Information:</h4>
+            <p class="text-sm text-gray-600">
+                This page demonstrates content gating based on membership tier. 
+                Free users see upgrade prompts, while Pro/Enterprise users see full content.
+                Try logging in with different demo accounts to see the experience.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

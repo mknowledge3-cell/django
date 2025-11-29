@@ -7,6 +7,7 @@ urlpatterns = [
     path('services/', views.ServicesView.as_view(), name='services'),
     path('portfolio/', views.PortfolioView.as_view(), name='portfolio'),
     path('contact/', views.contact_view, name='contact'),
+    path('demos/', views.DemosView.as_view(), name='demos'),
 ]
 
 urlpatterns += [

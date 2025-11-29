@@ -1,0 +1,99 @@
+{% extends 'sandbox/base_business.html' %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="gradient-bg text-white pt-16 pb-20">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+        <h1 class="text-5xl font-bold mb-6">Transform Your Business Growth</h1>
+        <p class="text-xl mb-8 text-purple-100 max-w-3xl mx-auto">
+            {{ demo_data.tagline }}
+        </p>
+        <div class="flex space-x-4 justify-center">
+            <a href="{% url 'business_services_demo' %}" class="bg-white text-purple-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300">
+                Our Services
+            </a>
+            <a href="{% url 'business_contact_demo' %}" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-purple-600 transition duration-300">
+                Free Consultation
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Services Preview -->
+<section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-800 mb-4">Our Services</h2>
+            <p class="text-xl text-gray-600">Comprehensive solutions for digital transformation</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            {% for service in demo_data.services %}
+            <div class="bg-gray-50 p-8 rounded-2xl hover:shadow-lg transition duration-300 border border-gray-200">
+                <div class="w-16 h-16 bg-purple-100 rounded-lg flex items-center justify-center mb-6">
+                    <i class="fas fa-chart-line text-purple-600 text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">{{ service.name }}</h3>
+                <p class="text-gray-600 mb-4">{{ service.description }}</p>
+                <div class="text-purple-600 font-bold text-xl mb-4">{{ service.price }}</div>
+                <ul class="text-gray-600 space-y-2 text-sm">
+                    {% for feature in service.features %}
+                    <li class="flex items-center">
+                        <i class="fas fa-check text-green-500 mr-2"></i>
+                        {{ feature }}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials -->
+<section class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-800 mb-4">Client Success Stories</h2>
+            <p class="text-xl text-gray-600">See how we've helped businesses achieve remarkable growth</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            {% for testimonial in demo_data.testimonials %}
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-200">
+                <div class="text-yellow-400 mb-4">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="text-gray-600 italic mb-6">"{{ testimonial.text }}"</p>
+                <div class="flex items-center">
+                    <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4">
+                        <i class="fas fa-user text-purple-600"></i>
+                    </div>
+                    <div>
+                        <div class="font-semibold text-gray-800">{{ testimonial.name }}</div>
+                        <div class="text-gray-500 text-sm">{{ testimonial.role }}</div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-20 gradient-bg text-white">
+    <div class="max-w-4xl mx-auto text-center px-4">
+        <h2 class="text-4xl font-bold mb-6">Ready to Accelerate Your Growth?</h2>
+        <p class="text-xl mb-8 text-purple-100">
+            Let's discuss how we can transform your digital presence and drive measurable results.
+        </p>
+        <a href="{% url 'business_contact_demo' %}" class="bg-white text-purple-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition duration-300 inline-block">
+            Start Your Project
+        </a>
+    </div>
+</section>
+{% endblock %}

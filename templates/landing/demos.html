@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Live Demos - Experience Our Work | khume{% endblock %}
+
+{% block meta_description %}Try our interactive website demos. Experience business websites, membership portals, and web applications we can build for you.{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="pt-24 pb-16 bg-gradient-to-r from-purple-600 to-blue-600 text-white">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+        <h1 class="text-5xl font-bold mb-4">Live Demos</h1>
+        <p class="text-xl max-w-3xl mx-auto text-blue-100">
+            Experience our work firsthand. Try fully functional demos of websites and applications we can build for your business.
+        </p>
+    </div>
+</section>
+
+<!-- Demos Grid -->
+<section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="grid lg:grid-cols-2 gap-12">
+            
+            <!-- Business Website Demo -->
+            <div class="bg-gray-50 rounded-2xl p-8 border border-gray-200 hover-lift">
+                <div class="text-center mb-8">
+                    <div class="w-20 h-20 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-briefcase text-purple-600 text-3xl"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold text-gray-800 mb-4">Business Website</h2>
+                    <p class="text-gray-600 text-lg">Professional corporate website with full content management</p>
+                </div>
+
+                <div class="space-y-4 mb-8">
+                    <h3 class="text-xl font-semibold text-gray-800">Features Included:</h3>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            Responsive design (mobile, tablet, desktop)
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            Contact forms with lead capture
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            Admin dashboard for content management
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            SEO-optimized structure
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            Fast loading & performance optimized
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="text-center">
+                    <a href="{% url 'business_demo' %}" 
+                       class="bg-purple-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-purple-700 transition duration-300 inline-block">
+                        Try Business Website Demo
+                    </a>
+                    <p class="text-gray-500 text-sm mt-3">Includes: Homepage, About, Services, Contact, Admin</p>
+                </div>
+            </div>
+
+            <!-- Membership Portal Demo -->
+            <div class="bg-gray-50 rounded-2xl p-8 border border-gray-200 hover-lift">
+                <div class="text-center mb-8">
+                    <div class="w-20 h-20 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-users text-green-600 text-3xl"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold text-gray-800 mb-4">Membership Portal</h2>
+                    <p class="text-gray-600 text-lg">Advanced user system with tiered access and content gating</p>
+                </div>
+
+                <div class="space-y-4 mb-8">
+                    <h3 class="text-xl font-semibold text-gray-800">Features Included:</h3>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            User registration & authentication
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            Tiered membership levels (Free/Pro/Enterprise)
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            Content gating & paywall system
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            Admin member management
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-3"></i>
+                            Payment integration ready
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="text-center">
+                    <a href="{% url 'membership_demo' %}" 
+                       class="bg-green-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-green-700 transition duration-300 inline-block">
+                        Try Membership Portal Demo
+                    </a>
+                    <p class="text-gray-500 text-sm mt-3">Demo accounts: free@demo.com / pro@demo.com / admin@demo.com (password: demo123)</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Demo Instructions -->
+<section class="py-20 bg-gray-50">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+        <h2 class="text-4xl font-bold text-gray-800 mb-8">How to Test Our Demos</h2>
+        
+        <div class="grid md:grid-cols-3 gap-8 text-left">
+            <div class="bg-white p-6 rounded-2xl">
+                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                    <span class="text-blue-600 font-bold">1</span>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-3">Choose a Demo</h3>
+                <p class="text-gray-600">Select either the Business Website or Membership Portal to explore.</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl">
+                <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                    <span class="text-green-600 font-bold">2</span>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-3">Explore Features</h3>
+                <p class="text-gray-600">Navigate through all pages, test forms, and experience the user flow.</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl">
+                <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                    <span class="text-purple-600 font-bold">3</span>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-3">Reset & Retry</h3>
+                <p class="text-gray-600">Use the reset button to clear all data and start fresh.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-20 bg-gradient-to-r from-purple-600 to-blue-600 text-white">
+    <div class="max-w-4xl mx-auto text-center px-4">
+        <h2 class="text-4xl font-bold mb-6">Ready for Your Own Custom Solution?</h2>
+        <p class="text-xl mb-8 text-blue-100">
+            These demos show just a fraction of what we can build. Let's create something amazing together.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="{% url 'contact' %}" class="bg-white text-purple-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition duration-300">
+                Start Your Project
+            </a>
+            <a href="{% url 'services' %}" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-purple-600 transition duration-300">
+                View All Services
+            </a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

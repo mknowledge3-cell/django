@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ demo_data.company_name }} - {{ demo_data.tagline }}{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .demo-banner {
+            background: linear-gradient(90deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 8px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Demo Warning Banner -->
+    <div class="demo-banner">
+        🚀 LIVE DEMO - This is a interactive preview. <a href="{% url 'reset_business_demo' %}" class="underline ml-2">Reset Demo</a>
+        <a href="{% url 'business_admin_demo' %}" class="bg-white text-orange-600 px-3 py-1 rounded ml-4 text-sm font-semibold">View Admin</a>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold text-purple-600">{{ demo_data.company_name }}</span>
+                </div>
+
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="{% url 'business_demo' %}" class="text-gray-700 hover:text-purple-600 font-medium">Home</a>
+                    <a href="{% url 'business_about_demo' %}" class="text-gray-700 hover:text-purple-600 font-medium">About</a>
+                    <a href="{% url 'business_services_demo' %}" class="text-gray-700 hover:text-purple-600 font-medium">Services</a>
+                    <a href="{% url 'business_contact_demo' %}" class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition duration-300">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-gray-400">This is a live demo showing what your business website could look like.</p>
+            <div class="mt-4">
+                <a href="{% url 'contact' %}?service=business-website" class="bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition duration-300">
+                    Get Your Own Website
+                </a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

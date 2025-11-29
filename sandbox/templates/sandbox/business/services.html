@@ -1,0 +1,53 @@
+{% extends 'sandbox/base_business.html' %}
+
+{% block content %}
+<section class="pt-16 pb-20 bg-gradient-to-r from-purple-600 to-blue-600 text-white">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+        <h1 class="text-5xl font-bold mb-6">Our Services</h1>
+        <p class="text-xl text-blue-100 max-w-3xl mx-auto">
+            Comprehensive digital solutions tailored to your business goals
+        </p>
+    </div>
+</section>
+
+<section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="grid lg:grid-cols-2 gap-12 mb-16">
+            {% for service in demo_data.services %}
+            <div class="bg-gray-50 rounded-2xl p-8 border border-gray-200">
+                <div class="flex items-start mb-6">
+                    <div class="w-16 h-16 bg-purple-100 rounded-xl flex items-center justify-center mr-6">
+                        <i class="fas fa-rocket text-purple-600 text-2xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-3xl font-bold text-gray-800 mb-2">{{ service.name }}</h3>
+                        <div class="inline-block bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-sm font-semibold">
+                            Popular
+                        </div>
+                    </div>
+                </div>
+                <p class="text-gray-600 text-lg mb-6">{{ service.description }}</p>
+                <ul class="space-y-3 mb-8">
+                    {% for feature in service.features %}
+                    <li class="flex items-center text-gray-700">
+                        <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                        {{ feature }}
+                    </li>
+                    {% endfor %}
+                </ul>
+                <div class="bg-white rounded-lg p-6 border border-gray-200">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-2xl font-bold text-gray-800">{{ service.price }}</span>
+                        <span class="text-sm text-gray-500">One-time project</span>
+                    </div>
+                    <a href="{% url 'business_contact_demo' %}?service={{ service.name|urlencode }}" 
+                       class="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition duration-300 text-center block">
+                        Get Quote
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
