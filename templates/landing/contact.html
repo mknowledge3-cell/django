@@ -74,6 +74,17 @@
                         </div>
                     </div>
                 </form>
+                <script>
+                document.querySelector('form').addEventListener('submit', function(e) {
+                    // Track form submission
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'submit_form', {
+                            'event_category': 'contact',
+                            'event_label': 'contact_form'
+                        });
+                    }
+                });
+                </script>
             </div>
 
             <!-- Contact Info -->

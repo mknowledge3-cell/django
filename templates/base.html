@@ -16,6 +16,17 @@
     })(window,document,'script','dataLayer','GTM-T8BPQT8F');</script>
     <!-- End Google Tag Manager -->
 
+    <!-- Google Analytics (GA4) -->
+    {% if GA_MEASUREMENT_ID %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ GA_MEASUREMENT_ID }}"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '{{ GA_MEASUREMENT_ID }}');
+    </script>
+    {% endif %}
+
     <!-- Favicon & App Icons -->
     <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/logo/favicon/apple-touch-icon.png' %}">
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/logo/favicon/favicon-32x32.png' %}">
@@ -92,13 +103,13 @@
                             <i class="fas fa-chevron-down ml-1 text-sm"></i>
                         </button>
                         <div class="absolute left-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border">
-                            <a href="{% url 'business_demo' %}" class="block px-4 py-2 text-gray-700 hover:bg-purple-50 hover:text-purple-600" target="_blank">
+                            <a href="{% url 'business_demo' %}" class="block px-4 py-2 text-gray-700 hover:bg-purple-50 hover:text-purple-600" target="_blank" onclick="gtag('event', 'click', {'event_category': 'demo', 'event_label': 'business_demo'});">
                                 Business Website
                             </a>
-                            <a href="{% url 'membership_demo' %}" class="block px-4 py-2 text-gray-700 hover:bg-purple-50 hover:text-purple-600" target="_blank">
+                            <a href="{% url 'membership_demo' %}" class="block px-4 py-2 text-gray-700 hover:bg-purple-50 hover:text-purple-600" target="_blank" onclick="gtag('event', 'click', {'event_category': 'demo', 'event_label': 'membership_demo'});">
                                 Membership Portal
                             </a>
-                            <a href="{% url 'ecommerce_demo' %}" class="block px-4 py-2 text-gray-700 hover:bg-purple-50 hover:text-purple-600" target="_blank">
+                            <a href="{% url 'ecommerce_demo' %}" class="block px-4 py-2 text-gray-700 hover:bg-purple-50 hover:text-purple-600" target="_blank" onclick="gtag('event', 'click', {'event_category': 'demo', 'event_label': 'ecommerce_demo'});">
                                 E-Commerce Store
                             </a>
                         </div>
@@ -126,13 +137,13 @@
             <!-- Mobile Demo Links -->
             <div class="border-t border-gray-200 mt-2 pt-2">
                 <div class="text-sm text-gray-500 px-2 py-1">Live Demos:</div>
-                <a href="{% url 'business_demo' %}" class="block py-2 text-gray-700 hover:text-purple-600 pl-4" target="_blank">
+                <a href="{% url 'business_demo' %}" class="block py-2 text-gray-700 hover:text-purple-600 pl-4" target="_blank" onclick="gtag('event', 'click', {'event_category': 'demo', 'event_label': 'business_demo'});">
                     Business Website
                 </a>
-                <a href="{% url 'membership_demo' %}" class="block py-2 text-gray-700 hover:text-purple-600 pl-4" target="_blank">
+                <a href="{% url 'membership_demo' %}" class="block py-2 text-gray-700 hover:text-purple-600 pl-4" target="_blank" onclick="gtag('event', 'click', {'event_category': 'demo', 'event_label': 'membership_demo'});">
                     Membership Portal
                 </a>
-                <a href="{% url 'ecommerce_demo' %}" class="block py-2 text-gray-700 hover:text-purple-600 pl-4" target="_blank">
+                <a href="{% url 'ecommerce_demo' %}" class="block py-2 text-gray-700 hover:text-purple-600 pl-4" target="_blank" onclick="gtag('event', 'click', {'event_category': 'demo', 'event_label': 'ecommerce_demo'});">
                     E-Commerce Store
                 </a>
             </div>

@@ -7,6 +7,10 @@ from django.views.generic import TemplateView
 class HomeView(TemplateView):
     template_name = 'landing/index.html'
 
+def services_view(request):
+    # Track page view
+    request.session['ga_event'] = 'view_services'
+    return render(request, 'landing/services.html')
 
 class ServicesView(TemplateView):
     template_name = 'landing/services.html'
@@ -30,7 +34,7 @@ def ecommerce(request):
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, View
 from django.core.mail import send_mail, BadHeaderError
-from django.http import HttpResponse
+from django.http import HttpResponse, request
 from django.contrib import messages
 import logging
 logger = logging.getLogger(__name__)
