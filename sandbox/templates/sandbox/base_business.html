@@ -31,36 +31,79 @@
 <body class="bg-gray-50">
     <!-- Demo Warning Banner -->
     <div class="demo-banner">
-        🚀 LIVE DEMO - This is a interactive preview. <a href="{% url 'reset_business_demo' %}" class="underline ml-2">Reset Demo</a>
+        🚀 LIVE DEMO - This is an interactive preview. <a href="{% url 'reset_business_demo' %}" class="underline ml-2">Reset Demo</a>
         <a href="{% url 'business_admin_demo' %}" class="bg-white text-orange-600 px-3 py-1 rounded ml-4 text-sm font-semibold">View Admin</a>
     </div>
 
-    <!-- Navigation -->
-    <nav class="bg-white shadow-lg">
+    <!-- NAVIGATION -->
+    <nav class="bg-white shadow-lg fixed top-0 left-0 right-0 z-50">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="flex justify-between items-center py-4">
-                <div class="flex items-center">
+            <div class="flex justify-between items-center h-16">
+
+                <!-- LEFT: Logo + Demo Label -->
+                <div class="flex items-center space-x-3">
                     <a href="{% url 'home' %}" class="flex items-center space-x-3">
-                        <img src="{% static 'images/logo/favicon/favicon-32x32.png' %}"
-                             alt="khume Logo"
-                             sizes="32x32"
-                             class="h-8 w-auto"
-                             onerror="this.style.display='none'">
-                        <span class="logo-text text-2xl text-purple-600">khume</span>
+                        <!-- Placeholder thumbnail -->
+                        <div class="h-10 w-10 bg-gray-200 border border-gray-300 rounded-md flex items-center justify-center overflow-hidden">
+                            <img src="{{ demo_data.logo_url|default:'#' }}"
+                                 alt="Your Logo"
+                                 class="h-full w-full object-cover"
+                                 onerror="this.style.display='none'">
+                        </div>
+
+                        <!-- Your Logo Text -->
+                        <span class="text-xl font-bold text-indigo-600">Your Logo</span>
                     </a>
-                    <span class="ml-4 text-gray-400">|</span>
-                    <span class="ml-4 text-gray-700">{{ demo_data.company_name }}</span>
+
+                    <!-- Divider + Company Name -->
+                    <span class="text-gray-300 ml-2">|</span>
+                    <span class="text-gray-700 font-medium">{{ demo_data.company_name }}</span>
                 </div>
 
+                <!-- DESKTOP MENU -->
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="{% url 'business_demo' %}" class="text-gray-700 hover:text-purple-600 font-medium">Home</a>
-                    <a href="{% url 'business_about_demo' %}" class="text-gray-700 hover:text-purple-600 font-medium">About</a>
+{#                    <a href="{% url 'business_about_demo' %}" class="text-gray-700 hover:text-purple-600 font-medium">About</a>#}
                     <a href="{% url 'business_services_demo' %}" class="text-gray-700 hover:text-purple-600 font-medium">Services</a>
-                    <a href="{% url 'business_contact_demo' %}" class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition duration-300">Get Started</a>
+
+                    <a href="{% url 'business_contact_demo' %}"
+                       class="bg-indigo-600 text-white px-5 py-2 rounded-lg hover:bg-indigo-700 transition">
+                        Get Started
+                    </a>
                 </div>
+
+                <!-- MOBILE HAMBURGER BUTTON -->
+                <button id="mobileMenuBtn"
+                        class="md:hidden text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
             </div>
         </div>
+
+        <!-- MOBILE MENU PANEL -->
+        <div id="mobileMenu"
+             class="hidden md:hidden bg-white border-t border-gray-200 shadow-lg px-4 py-4 space-y-4">
+
+            <a href="{% url 'business_demo' %}" class="block text-gray-700 hover:text-purple-600 font-medium">Home</a>
+{#            <a href="{% url 'business_about_demo' %}" class="block text-gray-700 hover:text-purple-600 font-medium">About</a>#}
+            <a href="{% url 'business_services_demo' %}" class="block text-gray-700 hover:text-purple-600 font-medium">Services</a>
+
+            <a href="{% url 'business_contact_demo' %}"
+               class="block bg-indigo-600 text-white text-center px-5 py-3 rounded-lg hover:bg-indigo-700 transition">
+                Get Started
+            </a>
+        </div>
     </nav>
+
+<!-- MOBILE MENU SCRIPT -->
+<script>
+    const btn = document.getElementById('mobileMenuBtn');
+    const menu = document.getElementById('mobileMenu');
+
+    btn.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+    });
+</script>
 
     <!-- Main Content -->
     <main>

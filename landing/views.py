@@ -15,6 +15,9 @@ class ServicesView(TemplateView):
 class PortfolioView(TemplateView):
     template_name = 'landing/portfolio.html'
 
+class AboutView(TemplateView):
+    template_name = 'landing/about.html'
+
 def school_portal(request):
     return render(request, "portfolios/portfolio_school_portal.html")
 
