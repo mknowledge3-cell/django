@@ -8,6 +8,14 @@
     <meta name="keywords" content="{% block meta_keywords %}web design, web development, e-commerce, membership sites, web applications, django, python{% endblock %}">
     <meta name="author" content="khume">
 
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-T8BPQT8F');</script>
+    <!-- End Google Tag Manager -->
+
     <!-- Favicon & App Icons -->
     <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/logo/favicon/apple-touch-icon.png' %}">
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/logo/favicon/favicon-32x32.png' %}">
@@ -48,6 +56,10 @@
 </head>
 
 <body class="bg-gray-50">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T8BPQT8F"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <!-- Navigation -->
     <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
         <div class="max-w-7xl mx-auto px-4">
@@ -70,7 +82,7 @@
                     <a href="{% url 'home' %}" class="text-gray-700 hover:text-purple-600 font-medium">Home</a>
                     <a href="{% url 'services' %}" class="text-gray-700 hover:text-purple-600 font-medium">Services</a>
                     <a href="{% url 'portfolio' %}" class="text-gray-700 hover:text-purple-600 font-medium">Portfolio</a>
-                    <a href="{% url 'about' %}" class="block py-2 text-gray-700 hover:text-purple-600">About Us</a>
+                    <a href="{% url 'about' %}" class="text-gray-700 hover:text-purple-600 font-medium">About Us</a>
 
 
                     <!-- Dropdown for Demos -->
